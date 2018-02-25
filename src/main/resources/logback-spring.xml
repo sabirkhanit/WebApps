@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<timestamp key="timestamp-by-second" datePattern="yyyyMMdd'T'HHmmss" />
+	
+	<property name="LOG_PATH" value="/home/logs" />
+
+	<appender name="WepAppsConfigGeneric"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/WepAppsConfigGeneric.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/WepAppsConfigGeneric.%i.log
+			</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>600</maxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>1MB</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n
+			</pattern>
+			<outputPatternAsHeader>true</outputPatternAsHeader>
+		</encoder>
+	</appender>
+
+	<appender name="WepAppsConfig"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/WepAppsConfig.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/WepAppsConfig.%i.log
+			</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>600</maxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>1MB</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n
+			</pattern>
+			<outputPatternAsHeader>true</outputPatternAsHeader>
+		</encoder>
+	</appender>
+	
+	<logger name="WepAppsConfigLogger" level="debug" additivity="false"> 
+		<appender-ref ref="WepAppsConfig" />
+	</logger>
+
+	<root>
+		<appender-ref ref="WepAppsConfigGeneric" />
+	</root>
+	
+</configuration>
